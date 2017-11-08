@@ -10,7 +10,7 @@ void init_UART1()                 //инициализация модуля 1 UART
     U1STA = 0;                    //регист контроля и управления 
     U1MODEbits.UARTEN = 1;        //включить модуль UART
     U1STAbits.UTXEN = 1;          //разрешаем передавать данные
-    IEC0bits.U1RXIE = 1;            //разрешаем прерывания по приёму данных 
+    IEC0bits.U1RXIE = 0;            //разрешаем прерывания по приёму данных 
     IPC2bits.U1RXIP  =  0b001;    // interrupt receive level 1 
     IFS0bits.U1RXIF = 0;            //обнуляем флаг(датчик) приёма
     /*Настройка_end*/ 
