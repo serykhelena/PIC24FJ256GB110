@@ -48,12 +48,13 @@ int main(void) {
     
     
     TRISEbits.TRISE9 = 0;       // set pin as output
-    char a;
+    char a = 'a';
     while(1)
     {
-        a = get_char_UART1();
-        b = a;
-        put_char_UART1(b);
+        
+        send_string_UART1("Hello");
+        put_char_UART1('  ');
+        __delay_ms(300);
         
     }
     
