@@ -37,7 +37,7 @@ void __attribute__ ((interrupt, auto_psv)) _T1Interrupt(void) //прерывание по та
 
 
 int main(void) {
-//    init_ADC();
+    init_ADC();
 //    init_timer1();
     init_UART1();
     
@@ -48,13 +48,11 @@ int main(void) {
     
     
     TRISEbits.TRISE9 = 0;       // set pin as output
-    char a = 'a';
+    
     while(1)
     {
         
-        send_string_UART1("Hello");
-        put_char_UART1('  ');
-        __delay_ms(300);
+        
         
     }
     

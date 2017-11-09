@@ -21,8 +21,13 @@
 
 #define BAUDRATEREG 34
 #define BAUDRATE 115200
-#define BRG 157                 //из таблицы дл€ Fcy=16ћ√ц и такт.частота 100 к√ц
+#define BRG 157                                 //из таблицы дл€ Fcy=16ћ√ц и такт.частота 100 к√ц
 
+#define Period      40000                       // 50 Hz 
+                                                // 27200 = 73.5 Hz -> 13.6 ms
+                                                // FCY/(73.5 Hz * prescaler )
+#define DutyCycle1   3030
+#define DutyCycle2   3030
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 
