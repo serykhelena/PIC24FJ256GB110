@@ -1,2 +1,2 @@
-void init_PWM1 ();
-void init_PWM2 ();
+void init_PWM1();
+void init_PWM2();

@@ -10,6 +10,13 @@
 int counter = 0;
 int flag = 0;
 
+/* Servo parameters
+ *  0.88 ms  |  1.44 ms  |  2 ms  |
+ *  ---------|-----------|--------|
+ *    1760   |   2880    |  4000  |  
+ *
+ */
+
 
 void __attribute__ ((interrupt, auto_psv)) _U1RXInterrupt(void)//прерывание по приходу данных по UART
 {
@@ -33,7 +40,7 @@ int main(void)
     init_PWM1(); 
     init_ADC();
 //    init_timer3();
-    init_UART1();
+//    init_UART1();
     
    
     
@@ -50,7 +57,7 @@ int main(void)
 //        __delay_ms(200);
 //        send_string_UART1('hi');
         duty = pot * 2.19 + 1760;
-        OC1R = duty;
+        OC1R = 3500;
 //        send_number_UART1(duty);
 //        put_char_UART1(' ');
 //        __delay_ms(300);

@@ -26,7 +26,7 @@
 #define Period      40000                       // 50 Hz 
                                                 // 27200 = 73.5 Hz -> 13.6 ms
                                                 // FCY/(73.5 Hz * prescaler )
-#define DutyCycle1   2000
+#define DutyCycle1   2800
 #define DutyCycle2   3030
 
 #endif	/* XC_HEADER_TEMPLATE_H */
