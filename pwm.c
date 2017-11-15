@@ -28,7 +28,7 @@ void init_PWM2 ()                  // инициализация ШИМ - driving wheels
     T2CONbits.TON = 1;            // старт таймер 2 
     
     CLKDIVbits.RCDIV = 0b000;     // FRC Postscaler bits (делим на 1 частоту "кварца")
-    RPOR6bits.RP13R = 19;        // выбор пина для ШИМ RB3 - RP13 Choose number of function carefully! 
+    RPOR6bits.RP13R = 19;        // выбор пина для ШИМ RB2 - RP13 Choose number of function carefully! 
     OC2RS = PR2;                  //период 
     OC2R = DutyCycle2;             // скважность
                    

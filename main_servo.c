@@ -6,6 +6,7 @@
 #include "timer.h"
 #include "adc.h"
 #include "uart.h"
+#include "pwm.h"
 
 int counter = 0;
 int flag = 0;
@@ -14,13 +15,14 @@ int flag = 0;
  *  0.88 ms  |  1.44 ms  |  2 ms  |
  *  ---------|-----------|--------|
  *    1760   |   2880    |  4000  |  
- *
+ *    down   |           |   up
+ *    right  |           |   left
  */
 
 
 void __attribute__ ((interrupt, auto_psv)) _U1RXInterrupt(void)//прерывание по приходу данных по UART
 {
-    
+    // x = 8.78   b = 1760
      IFS0bits.U1RXIF = 0;                //обнуляем флаг(датчик) приёма
 }
 
@@ -34,10 +36,11 @@ int main(void)
     
      /* PWM */
     TRISBbits.TRISB1 = 0;              // pin SDO set as output for PWM1 (upper servo)
-    //TRISBbits.TRISB2 = 0;              // pin SDI set as output for PWM2 (down serva)
+    TRISBbits.TRISB2 = 0;              // pin SDI set as output for PWM2 (down serva)
     /********/
     
     init_PWM1(); 
+    init_PWM2();
     init_ADC();
 //    init_timer3();
 //    init_UART1();
@@ -57,7 +60,7 @@ int main(void)
 //        __delay_ms(200);
 //        send_string_UART1('hi');
         duty = pot * 2.19 + 1760;
-        OC1R = 3500;
+        OC2R = 2800;
 //        send_number_UART1(duty);
 //        put_char_UART1(' ');
 //        __delay_ms(300);
