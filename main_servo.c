@@ -19,9 +19,13 @@ int flag = 0;
  *    right  |           |   left
  */
 
-
+unsigned char com = 128;
 void __attribute__ ((interrupt, auto_psv)) _U1RXInterrupt(void)//прерывание по приходу данных по UART
 {
+    com = get_char_UART1();
+    
+    OC2R = com*8.78 + 1760;
+    
     // x = 8.78   b = 1760
      IFS0bits.U1RXIF = 0;                //обнуляем флаг(датчик) приёма
 }
@@ -43,24 +47,27 @@ int main(void)
     init_PWM2();
     init_ADC();
 //    init_timer3();
-//    init_UART1();
+    init_UART1();
     
    
     
     TRISEbits.TRISE9 = 0;       // set pin as output
     int pot = 0;
     int duty = 0;
+    unsigned char a = 0;
     
     while(1)
     {
+         //OC1R = 2800;
+        //OC2R = 200*8.78 + 1760;;
         
-        pot = read_ADC(11);
+        //pot = read_ADC(11);
 //        send_number_UART1(pot);
 //        put_char_UART1(' ');
 //        __delay_ms(200);
 //        send_string_UART1('hi');
-        duty = pot * 2.19 + 1760;
-        OC2R = 2800;
+       // duty = pot * 2.19 + 1760;
+       // OC2R = 2800;
 //        send_number_UART1(duty);
 //        put_char_UART1(' ');
 //        __delay_ms(300);
