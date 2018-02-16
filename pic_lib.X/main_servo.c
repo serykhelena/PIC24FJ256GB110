@@ -33,46 +33,66 @@ void __attribute__ ((interrupt, auto_psv)) _U1RXInterrupt(void)//прерывание по п
 
 int main(void)
 {
+    AD1PCFGL = 0xFFFF; 
     /* UART */  
-    RPINR18bits.U1RXR = 28;             //назначaeм RP24 (RB4) для приёма данных (RX)   
-    RPOR9bits.RP18R = 3;                //назначаем RP18 (RB5) для передачи данных (TX)
+    RPINR18bits.U1RXR = 1; //RP13 -> RB2            //назначaeм RP24 (RB4) для приёма данных (RX)   
+    RPOR6bits.RP13R = 3;          //RP1->RB1      //назначаем RP18 (RB5) для передачи данных (TX)
     /*******/
     
      /* PWM */
-    TRISBbits.TRISB1 = 0;              // pin SDO set as output for PWM1 (upper servo)
-    TRISBbits.TRISB2 = 0;              // pin SDI set as output for PWM2 (down serva)
+    //TRISBbits.TRISB1 = 0;              // pin SDO set as output for PWM1 (upper servo)
+    //TRISBbits.TRISB2 = 0;              // pin SDI set as output for PWM2 (down serva)
     /********/
     
-    init_PWM1(); 
-    init_PWM2();
-    init_ADC();
+    //init_PWM1(); 
+    //init_PWM2();
+    //init_ADC();
 //    init_timer3();
     init_UART1();
+    TRISAbits.TRISA5 = 0;       // Blue
+    TRISAbits.TRISA4 = 0;       // Pink
+    TRISAbits.TRISA15 = 0;       // Blue
+    TRISAbits.TRISA14 = 0;       // Pink
+    TRISAbits.TRISA3 = 0;       // Yellow
+    TRISAbits.TRISA2 = 0;       // Orange
     
-   
-    
-    TRISEbits.TRISE9 = 0;       // set pin as output
-    int pot = 0;
-    int duty = 0;
-    unsigned char a = 0;
+    uint16_t counter = 0;
     
     while(1)
     {
-         //OC1R = 2800;
-        //OC2R = 200*8.78 + 1760;;
-        
-        //pot = read_ADC(11);
-//        send_number_UART1(pot);
-//        put_char_UART1(' ');
-//        __delay_ms(200);
-//        send_string_UART1('hi');
-       // duty = pot * 2.19 + 1760;
-       // OC2R = 2800;
-//        send_number_UART1(duty);
-//        put_char_UART1(' ');
-//        __delay_ms(300);
-        
-        
+        //put_char_UART1('o');
+        //LATAbits.LATA15 = 0;     // blue off
+        LATAbits.LATA5 = 0;     // blue off
+        LATAbits.LATA2 = 1;     // orange
+        __delay_ms(5);
+        LATAbits.LATA2 = 1;     // orange
+        LATAbits.LATA3 = 1;     // yellow 
+        __delay_ms(5);
+        LATAbits.LATA2 = 0;     // orange off
+        LATAbits.LATA3 = 1;     // yellow 
+        __delay_ms(5);
+        LATAbits.LATA3 = 1;     // yellow
+        LATAbits.LATA4 = 1;     // pink
+        //LATAbits.LATA14 = 1;     // pink
+        __delay_ms(5);
+        LATAbits.LATA3 = 0;     // yellow off
+        //LATAbits.LATA14 = 1;     // pink
+        LATAbits.LATA4 = 1;     // pink
+        __delay_ms(5);
+        LATAbits.LATA4 = 1;     // pink
+        LATAbits.LATA5 = 1;     // blue
+        //LATAbits.LATA14 = 1;     // pink
+        //LATAbits.LATA15 = 1;     // blue
+        __delay_ms(5);
+        LATAbits.LATA4 = 0;     // pink off
+        LATAbits.LATA5 = 1;     // blue
+//        LATAbits.LATA14 = 0;     // pink off
+//        LATAbits.LATA15 = 1;     // blue
+         __delay_ms(5);
+         LATAbits.LATA5 = 1;     // blue
+         //LATAbits.LATA15 = 1;     // blue
+         LATAbits.LATA2 = 1;     // orange
+         __delay_ms(5);
     }
     
     
