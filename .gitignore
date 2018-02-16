@@ -1,12 +1,5 @@
 
-build
-debug
-dist
-nbproject
-Makefile
-
-/TEST.X/nbproject/private/
-/TEST.X/dist/default/
-/TEST.X/build/default/
-
-madCar.X
+*/build/
+*/debug/
+*/dist/
+*/nbproject/
