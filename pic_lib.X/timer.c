@@ -1,39 +1,35 @@
-
-
 #include "define.h"
 
-void init_timer1()                      //инициализация таймера №1
+void init_timer1()                      // initialization of timer 1
 {
-    T1CON = 0x00;                       //стоп таймер 1 и перезапуск упр.регистра
-    TMR1 = 0x00;                        //очистить регистр
+    T1CON = 0x00;                       // stop timer and reset registers 
+    TMR1 = 0x00;                        // clear register (start value)
         
-    T1CONbits.TCKPS = 0b01;             //предделитель 1:8
-    T1CONbits.TCS = 0;                  //внутренний источник тактирования
-    T1CONbits.TGATE = 0;                
-    T1CONbits.TSYNC = 0;                //не синхронизировать с внеш.источником
-    PR1 = timer1;                       // период = 16000 = 1 ms 
-           
-    IPC0bits.T1IP = 0b001;               //Уровень приоритета для прерывания таймер 1 -> level 1
-    IFS0bits.T1IF = 0;                   //Очищаем флаг по прерыванию таймера 1
-    IEC0bits.T1IE = 1;                   //Разрешить прерывание для таймер 1
+    T1CONbits.TCKPS = 0b01;             // prescaler 1:8
+    T1CONbits.TCS = 0;                  // Timer1 Clock Source = Internal clock (FOSC/2)
+    T1CONbits.TGATE = 0;                // Timer1 Gated Time Accumulation disable 
+    T1CONbits.TSYNC = 0;                // Do not synchronize external clock input
+    PR1 = TIMER1;                       // period 1 ms 
     
-    T1CONbits.TON = 1;                  //старт 16-битный таймер №1
+    IPC0bits.T1IP = 0b001;              // interrupt priority level 1
+    IFS0bits.T1IF = 0;                  // clear timer interrupt sensor (flag) 
+    IEC0bits.T1IE = 0;                  // turn off timer interrupt 
+    
+    T1CONbits.TON = 1;                  // start timer 1 
 }
 
-
-void init_timer3()
+void init_timer3()                      // initialization of timer 3
 {
-    T3CON = 0x00;                       //стоп таймер 3 и перезапуск упр.регистра
-    TMR3 = 0x00;                        //очистить регистр (нач.значение таймера)
+    T3CON = 0x00;                       // stop timer and reset registers 
+    TMR3 = 0x00;                        // clear register (start value)
     
-    T3CONbits.TCKPS = 0;                //предделитель 1:1
-    T3CONbits.TCS = 0;                  //внутренний источник тактирования
-    T3CONbits.TGATE = 0;   
-//    T2CONbits.T32 = 0;                  //16-битный раздельный режим работы                  
-    PR3 = timer3;                       //период (65536)
+    T3CONbits.TCKPS = 0;                // prescaler 1:1
+    T3CONbits.TCS = 0;                  // Timer1 Clock Source = Internal clock (FOSC/2)
+    T3CONbits.TGATE = 0;                // Timer1 Gated Time Accumulation disable                
+    PR3 = TIMER3;                       // period (max value) 
     
-    IFS0bits.T3IF = 0;                  //Очищаем флаг по прерыванию таймера 3
-    IEC0bits.T3IE = 0;                  //запрещаем прерывание для таймер 3
+    IFS0bits.T3IF = 0;                  // clear timer interrupt sensor (flag) 
+    IEC0bits.T3IE = 0;                  // turn off timer interrupt
     
-    T3CONbits.TON = 1;                  //старт 16-битный таймер №3
+    T3CONbits.TON = 1;                  // start timer 3
 }
